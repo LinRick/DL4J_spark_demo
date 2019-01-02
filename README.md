@@ -4,6 +4,7 @@
 
 ## Description
 - There are two algorithms for demoing
+- 
     **Including program:**
     | program name | program description |
     | ------ | ------ |
@@ -40,11 +41,17 @@ $./spark-submit --class com.itri.spark.DL4JRNNsparkTrain/root/demo_nfs/DL4J-spar
 ### Import keras model in DL4J framework
 > **Note:** 
 The model in keras setting:
+
 model = Sequential()
+
 model.add(Dense(10, input_shape=(4,), activation='relu', name='fc1'))
+
 model.add(Dense(10, activation='relu', name='fc2'))
+
 model.add(Dense(3, activation='softmax', name='output'))
+
 optimizer = Adam(lr=0.001)
+
 model.compile(optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 ```sh
 $ cd DL4J_spark_demo
