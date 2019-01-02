@@ -6,6 +6,7 @@
 - There are two algorithms for demoing
 - 
     **Including program:**
+
     | program name | program description |
     | ------ | ------ |
     |DL4JCNNsparkTrain| CNN algorithm for training phase|
