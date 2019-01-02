@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.itri.keras</groupId>
+  <artifactId>DL4Jsparkdemo</artifactId>
+  <version>0.1</version>
+
+  <name>DL4J-spark-demo</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    
+    <jdk.version>1.8</jdk.version>
+    <spark.version>2.3.1</spark.version>
+    <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+    <spark.scala.version>2.11</spark.scala.version>
+    <scala.binary.version>2.11</scala.binary.version>
+        
+    <dl4j.version>1.0.0-beta</dl4j.version>
+    <dl4j.spark.version>1.0.0-beta_spark_2</dl4j.spark.version>
+    <nd4j.version>1.0.0-beta</nd4j.version>
+    
+    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+    
+    <maven-shade-plugin.version>3.2.0</maven-shade-plugin.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+	</dependency>   
+	
+	<dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>deeplearning4j-core</artifactId>
+      <version>${dl4j.version}</version>      
+      <exclusions>        
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-math3</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-compress</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>          
+        </exclusion>              
+        <exclusion>
+          <groupId>org.datavec</groupId>
+          <artifactId>datavec-data-image</artifactId>          
+        </exclusion>      
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-tsne</artifactId>          
+        </exclusion>
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-datasets</artifactId>          
+        </exclusion>
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>nearestneighbor-core</artifactId>          
+        </exclusion>
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-ui-components</artifactId>          
+        </exclusion>                
+        <exclusion>
+          <groupId>org.nd4j</groupId>
+          <artifactId>jackson</artifactId>          
+        </exclusion>
+      </exclusions>      
+	</dependency>
+ 
+    <dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>dl4j-spark_${scala.binary.version}</artifactId>
+      <version>${dl4j.spark.version}</version>      
+      <exclusions>                
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-ui-components</artifactId>          
+        </exclusion>        
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-core</artifactId>          
+        </exclusion>                
+      </exclusions>       
+    </dependency>
+      
+	<dependency>
+      <groupId>org.nd4j</groupId>
+      <artifactId>nd4j-native</artifactId>
+      <version>${nd4j.version}</version>
+      <exclusions>        
+        <exclusion>
+          <groupId>org.bytedeco</groupId>
+          <artifactId>javacpp</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.bytedeco.javacpp-presets</groupId>
+          <artifactId>mkl</artifactId>
+        </exclusion>        
+        <exclusion>
+          <groupId>org.nd4j</groupId>
+          <artifactId>nd4j-backend-impls</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.nd4j</groupId>
+          <artifactId>d4j-native-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.nd4j</groupId>
+          <artifactId>nd4j-api</artifactId>
+        </exclusion>
+      </exclusions>    
+    </dependency>
+    
+    <dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>deeplearning4j-ui_${scala.binary.version}</artifactId>
+      <version>${dl4j.version}</version>
+      <exclusions>      
+        <exclusion>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-nlp</artifactId>
+        </exclusion>        
+        <exclusion>
+          <groupId>org.nd4j</groupId>
+          <artifactId>nd4j-jackson</artifactId>          
+        </exclusion>      
+      </exclusions>   
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+      <plugins>      
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.5.1</version>
+          <configuration>
+            <source>${jdk.version}</source>
+            <target>${jdk.version}</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+                
+   		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-shade-plugin</artifactId>
+		  <version>3.0.0</version>
+		  <configuration>
+		    <shadeTestJar>true</shadeTestJar>
+		  </configuration>
+		</plugin>
+
+		<!-- Maven Assembly Plugin -->
+        <!--<plugin>		  
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <descriptorRefs>
+              <descriptorRef>jar-with-dependencies</descriptorRef>
+            </descriptorRefs>
+            <outputEncoding>UTF-8</outputEncoding>            
+          </configuration>
+          <executions>
+            <execution>
+              <id>make-assembly</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>-->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>java</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin.version}</version>
+                <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>${shadedClassifier}</shadedClassifierName>
+                    <createDependencyReducedPom>true</createDependencyReducedPom>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <!--<exclude>org/datanucleus/**</exclude>-->
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>reference.conf</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer" />
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+      </plugins>
+  </build>
+  
+</project>
