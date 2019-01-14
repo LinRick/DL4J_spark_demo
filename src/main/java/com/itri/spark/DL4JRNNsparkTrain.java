@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Deep learning 4j for one CNN framework runs over local spark.
+ * Deep learning 4j for one CNN framework runs over spark standalone mode.
  *
  */
 public class DL4JRNNsparkTrain 
@@ -70,7 +70,8 @@ public class DL4JRNNsparkTrain
         
         String TraindatacsvPath = "/root/demo_nfs/datasetDNN/" + TrainDataName + ".csv";        
         SparkConf sparkConf = new SparkConf();
-        sparkConf.setAppName("Train RNN algorithm for " + TrainDataName);
+        sparkConf.setMaster("spark://ubuntu7:7077");
+        sparkConf.setAppName("Demo for training RNN for " + TrainDataName + " dataset");
         JavaSparkContext sc = new JavaSparkContext(sparkConf);
 
         //Load csv file as a training dataset
@@ -99,18 +100,12 @@ public class DL4JRNNsparkTrain
                 .gradientNormalization(GradientNormalization.RenormalizeL2PerLayer)
                 .list()
                 .layer(0, new GravesLSTM.Builder()
-                		.name("RNN1")
+                		.name("RNN1_LSTM")
         				.nIn(numInputs)
         				.nOut(numOutNeuronsInRNNLayer)
         				.activation(Activation.RELU)
         				.build())
-                .layer(1, new GravesLSTM.Builder()
-                		.name("RNN2")
-        				.nIn(numInputs)
-        				.nOut(numOutNeuronsInRNNLayer)
-        				.activation(Activation.RELU)
-        				.build())
-        		.layer(2, new RnnOutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
+        		.layer(1, new RnnOutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
         				.name("output")
         				.activation(Activation.SOFTMAX)        				
         				.nIn(numOutNeuronsInRNNLayer)

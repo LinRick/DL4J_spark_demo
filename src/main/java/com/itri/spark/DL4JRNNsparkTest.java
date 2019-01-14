@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Deep learning 4j for one RNN framework runs over local spark.
+ * Deep learning 4j for one RNN framework runs over spark standalone mode.
  *
  */
 public class DL4JRNNsparkTest 

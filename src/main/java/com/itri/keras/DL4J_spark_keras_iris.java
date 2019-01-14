@@ -59,7 +59,7 @@ public class DL4J_spark_keras_iris {
         
         SparkConf sparkConf = new SparkConf();
         sparkConf.setMaster("spark://ubuntu7:7077");
-        sparkConf.setAppName("Demo for predicting with CNN Model for " + TestDataName + " dataset");
+        sparkConf.setAppName("Demo for predicting with keras model for " + TestDataName + " dataset");
         
         //Create one spark instance
         JavaSparkContext sc = new JavaSparkContext(sparkConf);

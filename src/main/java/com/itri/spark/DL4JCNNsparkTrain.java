@@ -40,9 +40,8 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
- * Deep learning 4j for training CNN framework runs over spark standalone.
+ * Deep learning 4j for training CNN framework runs over spark standalone mode.
  *
  */
 public class DL4JCNNsparkTrain 
@@ -82,7 +81,7 @@ public class DL4JCNNsparkTrain
         //Set configures of spark
         SparkConf sparkConf = new SparkConf();        
         sparkConf.setMaster("spark://ubuntu7:7077");        
-        sparkConf.setAppName("Demo for training CNN framework with " + TrainDataName + " dataset");
+        sparkConf.setAppName("Demo for training CNN with " + TrainDataName + " dataset");
 
         //Create one spark instance
         JavaSparkContext sc = new JavaSparkContext(sparkConf);

@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Deep learning 4j for one CNN framework runs over local spark.
+ * Deep learning 4j for one CNN framework runs over spark standalone mode.
  *
  */
 public class DL4JCNNsparkTest 
@@ -69,7 +69,7 @@ public class DL4JCNNsparkTest
         
         SparkConf sparkConf = new SparkConf();
         sparkConf.setMaster("spark://ubuntu7:7077");
-        sparkConf.setAppName("Demo for predicting with CNN Model for " + TestDataName + " dataset");
+        sparkConf.setAppName("Demo for predicting with CNN for " + TestDataName + " dataset");
         
         //Create one spark instance
         JavaSparkContext sc = new JavaSparkContext(sparkConf);
